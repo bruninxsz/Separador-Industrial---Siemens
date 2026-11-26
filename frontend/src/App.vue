@@ -4,9 +4,9 @@ import { io } from 'socket.io-client'
 
 const indicadores = [
   { titulo: 'Produção total', descricao: 'Total de peças processadas', chave: 'total', cor: 'teal' },
-  { titulo: 'Metais', descricao: 'Quantidade de materiais metálicos', chave: 'metais', cor: 'red' },
-  { titulo: 'Plásticos', descricao: 'Quantidade de materiais plásticos', chave: 'plasticos', cor: 'green' },
-  { titulo: 'Vidros', descricao: 'Quantidade de materiais de vidro', chave: 'vidros', cor: 'yellow' },
+  { titulo: 'Metais', descricao: 'Quantidade de materiais metálicos', chave: 'metais', cor: 'yellow' },
+  { titulo: 'Plásticos', descricao: 'Quantidade de materiais plásticos', chave: 'plasticos', cor: 'red' },
+  { titulo: 'Vidros', descricao: 'Quantidade de materiais de vidro', chave: 'vidros', cor: 'green' },
 ]
 
 const cores = {
