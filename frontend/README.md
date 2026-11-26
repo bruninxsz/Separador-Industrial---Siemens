@@ -1,5 +1,10 @@
-# Vue 3 + Vite
+# Interface Vue – Separadora N1
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Painel que mostra os contadores de produção e o status da comunicação em tempo real, recebendo os dados do backend por Socket.IO (`socket.io-client`).
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+```bash
+npm install
+npm run dev   # endereço mostrado pelo Vite, por padrão http://localhost:5173 (o backend precisa estar rodando na porta 3000)
+```
+
+As instruções completas de execução e o roteiro de testes estão no [README principal](../README.md).
