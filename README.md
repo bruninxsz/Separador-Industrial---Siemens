@@ -64,9 +64,9 @@ O servidor OPC UA do CLP precisa, portanto, aceitar conexões sem segurança e s
 
 | Variável | Identificador |
 |---|---|
-| `contPecasVermelhas` | `i=3` |
-| `contPecasVerdes` | `i=4` |
-| `contPecasAmarelas` | `i=5` |
+| `contMetais` | `i=3` |
+| `contPlasticos` | `i=4` |
+| `contVidros` | `i=5` |
 | `contPecasTotal` | `i=6` |
 | `estadoMaquina` | `i=7` |
 
@@ -95,9 +95,9 @@ Mensagens que o código imprime no terminal:
 ```
 Backend em http://localhost:3000
 [OPC UA] NodeIds lidos:
-   contPecasVermelhas   ns=<índice>;i=3
-   contPecasVerdes      ns=<índice>;i=4
-   contPecasAmarelas    ns=<índice>;i=5
+   contMetais           ns=<índice>;i=3
+   contPlasticos        ns=<índice>;i=4
+   contVidros           ns=<índice>;i=5
    contPecasTotal       ns=<índice>;i=6
    estadoMaquina        ns=<índice>;i=7
 [OPC UA] CONECTADO - Comunicação com o S7-1500 ativa
@@ -116,9 +116,9 @@ Depois de conectar, o backend lê as cinco variáveis a cada **500 ms**.
   "mensagem": "Comunicação com o S7-1500 ativa",
   "ultimaLeitura": "<data/hora ISO da última leitura>",
   "producao": {
-    "contPecasVermelhas": 0,
-    "contPecasVerdes": 0,
-    "contPecasAmarelas": 0,
+    "contMetais": 0,
+    "contPlasticos": 0,
+    "contVidros": 0,
     "contPecasTotal": 0,
     "estadoMaquina": 0
   }
@@ -144,7 +144,7 @@ Abra o endereço que o Vite mostra no terminal (por padrão `http://localhost:51
 
 A interface mostra:
 - o selo **PLC conectado** (verde) ou **PLC desconectado** (vermelho) no cabeçalho;
-- quatro indicadores: **Produção total**, **Peças vermelhas**, **Peças verdes** e **Peças amarelas**;
+- quatro indicadores e uma tabela: **Produção total**, **Metal**, **Plástico** e **Vidro**;
 - **Estado da aplicação**, com o valor numérico de `estadoMaquina`;
 - **Comunicação OPC UA**, com a mensagem de status do backend e o horário da última leitura.
 

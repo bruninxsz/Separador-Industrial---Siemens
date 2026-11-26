@@ -86,9 +86,9 @@ const URI_NAMESPACE = 'http://vue'
 // identificadores dessas variáveis no servidor OPC UA do CLP.
 // O nome à esquerda é o nome usado no JSON e enviado para a tela.
 const IDS = {
-  contPecasVermelhas: 3,
-  contPecasVerdes: 4,
-  contPecasAmarelas: 5,
+  contMetais: 3,
+  contPlasticos: 4,
+  contVidros: 5,
   contPecasTotal: 6,
   estadoMaquina: 7
 }

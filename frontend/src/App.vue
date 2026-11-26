@@ -4,9 +4,9 @@ import { io } from 'socket.io-client'
 
 const indicadores = [
   { titulo: 'Produção total', descricao: 'Total de peças processadas', chave: 'total', cor: 'teal' },
-  { titulo: 'Peças vermelhas', descricao: 'Total destinado à baia vermelha', chave: 'red', cor: 'red' },
-  { titulo: 'Peças verdes', descricao: 'Total destinado à baia verde', chave: 'green', cor: 'green' },
-  { titulo: 'Peças amarelas', descricao: 'Total destinado à baia amarela', chave: 'yellow', cor: 'yellow' },
+  { titulo: 'Metais', descricao: 'Quantidade de materiais metálicos', chave: 'metais', cor: 'red' },
+  { titulo: 'Plásticos', descricao: 'Quantidade de materiais plásticos', chave: 'plasticos', cor: 'green' },
+  { titulo: 'Vidros', descricao: 'Quantidade de materiais de vidro', chave: 'vidros', cor: 'yellow' },
 ]
 
 const cores = {
@@ -20,7 +20,7 @@ const plc = ref({
   connected: false,
   message: 'Conectando ao backend...',
   updatedAt: null,
-  counters: { red: 0, green: 0, yellow: 0, total: 0 },
+  counters: { metais: 0, plasticos: 0, vidros: 0, total: 0 },
   state: 0,
 })
 const statusClass = computed(() => plc.value.connected
@@ -45,9 +45,9 @@ onMounted(() => {
   })
   socket.on('dadosProducao', (data) => {
     plc.value.counters = {
-      red: data.contPecasVermelhas,
-      green: data.contPecasVerdes,
-      yellow: data.contPecasAmarelas,
+      metais: data.contMetais,
+      plasticos: data.contPlasticos,
+      vidros: data.contVidros,
       total: data.contPecasTotal,
     }
     plc.value.state = data.estadoMaquina
@@ -72,7 +72,7 @@ onUnmounted(() => socket?.disconnect())
     <header class="flex min-h-[104px] flex-col items-start justify-between gap-4 border-b-[5px] border-[#209b72] bg-[#203a4e] px-[3.6%] py-5 text-white sm:flex-row sm:items-center sm:gap-6">
       <div>
         <h1 class="m-0 text-2xl font-medium leading-tight">Interface Gráfica da Planta N1</h1>
-        <p class="mt-2.5 text-sm text-[#d2dce3]">Seleção e movimentação de peças por cor</p>
+        <p class="mt-2.5 text-sm text-[#d2dce3]">Separação e contagem de materiais</p>
       </div>
       <div class="inline-flex shrink-0 items-center gap-2 rounded-[5px] border px-3.5 py-[11px] text-[13px] font-bold" :class="statusClass" role="status" aria-live="polite">
         <span class="size-2.5 rounded-full bg-white"></span>
@@ -92,6 +92,25 @@ onUnmounted(() => socket?.disconnect())
             <p class="m-0 max-w-[150px] text-xs leading-tight text-[#647d8d]">{{ item.descricao }}</p>
           </article>
         </div>
+        <table class="mt-6 w-full border-collapse text-left" aria-label="Contagem de materiais separados">
+          <thead>
+            <tr class="border-b border-[#cbd5dc] text-sm text-[#526b7b]">
+              <th class="px-3 py-2 font-semibold">Material</th>
+              <th class="px-3 py-2 text-right font-semibold">Quantidade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="linha in [
+              { nome: 'Metal', chave: 'metais' },
+              { nome: 'Plástico', chave: 'plasticos' },
+              { nome: 'Vidro', chave: 'vidros' },
+              { nome: 'Total', chave: 'total' },
+            ]" :key="linha.chave" class="border-b border-[#e2e8ec] last:border-0">
+              <th scope="row" class="px-3 py-3 font-medium">{{ linha.nome }}</th>
+              <td class="px-3 py-3 text-right font-bold tabular-nums">{{ plc.counters[linha.chave] ?? '—' }}</td>
+            </tr>
+          </tbody>
+        </table>
       </section>
 
       <div class="mt-[17px] grid grid-cols-1 gap-4 sm:grid-cols-2">
